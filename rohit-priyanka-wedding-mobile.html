@@ -1,0 +1,1668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+<title>Rohit weds Priyanka · 4 December 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Great+Vibes&family=Noto+Serif+Devanagari:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* ── VARIABLES ── */
+:root{
+  --cream:#FDF6E3; --cream2:#F8EDD0; --parchment:#F0E2B6;
+  --gold:#B8860B;  --gold2:#DAA520;  --gold3:#F5D874;
+  --brown:#3D1A00; --brown2:#5C3800; --brown3:#7A4A00;
+  --warm:#6B1A00;
+}
+
+/* ── RESET ── */
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:100%;height:100%;overflow:hidden;}
+body{
+  background:#8B6010;
+  font-family:'Cormorant Garamond','Georgia',serif;
+  color:var(--brown);
+  -webkit-tap-highlight-color:transparent;
+  user-select:none;
+}
+
+/* ── FLOATING GOLD PARTICLES ── */
+.particle{
+  position:fixed;pointer-events:none;z-index:9997;border-radius:50%;
+  background:radial-gradient(circle,#F5D874,#B8860B);
+  animation:floatUp linear forwards;
+}
+@keyframes floatUp{
+  0%{transform:translateY(0) scale(1);opacity:.7;}
+  100%{transform:translateY(-100vh) scale(.2);opacity:0;}
+}
+
+/* ────────────────────────────────────────
+   WELCOME OVERLAY (GIF + open button)
+──────────────────────────────────────── */
+#overlay{
+  position:fixed;inset:0;z-index:9999;
+  background:#1a0a00;
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
+  padding-bottom:44px;overflow:hidden;
+  transition:opacity .8s ease,visibility .8s ease;
+}
+#overlay.hide{opacity:0;visibility:hidden;pointer-events:none;}
+.ov-gif{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:contain;object-position:center;z-index:0;
+}
+.ov-btn{
+  position:relative;z-index:2;overflow:hidden;
+  margin-top:20px;padding:15px 44px;border-radius:50px;
+  background:linear-gradient(135deg,#F0C040 0%,#C8960C 45%,#DAA520 100%);
+  border:none;outline:none;
+  color:#3B1F00;
+  font-family:'Cormorant Garamond','Playfair Display',serif;
+  font-size:1.15rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  cursor:pointer;
+  box-shadow:0 0 0 2px rgba(245,216,116,.55),0 6px 28px rgba(0,0,0,.55),0 0 42px rgba(218,165,32,.45);
+  animation:btn-pulse 2.4s ease-in-out infinite;
+  transition:transform .2s,box-shadow .2s;
+}
+.ov-btn::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.38) 50%,transparent 65%);
+  background-size:200% 100%;background-position:200% 0;
+  animation:btn-shimmer 2.4s ease-in-out infinite;
+}
+.ov-btn::after{
+  content:'';position:absolute;inset:2px;border-radius:50px;
+  border:1px solid rgba(255,240,160,.45);pointer-events:none;
+}
+@keyframes btn-shimmer{
+  0%{background-position:200% 0;}
+  55%,100%{background-position:-200% 0;}
+}
+@keyframes btn-pulse{
+  0%,100%{box-shadow:0 0 0 2px rgba(245,216,116,.55),0 6px 28px rgba(0,0,0,.55),0 0 42px rgba(218,165,32,.45);}
+  50%{box-shadow:0 0 0 5px rgba(245,216,116,.25),0 6px 28px rgba(0,0,0,.55),0 0 64px rgba(218,165,32,.7);}
+}
+.ov-btn:hover,.ov-btn:active{transform:scale(1.07);}
+
+/* ────────────────────────────────────────
+   GIF SLIDE (slide 0 — kept for structure)
+──────────────────────────────────────── */
+#sgif{ background:#1a0a00; }
+#sgif .gif-frame{
+  width:100%;height:100%;
+  display:flex;align-items:center;justify-content:center;
+}
+#sgif .gif-frame img{
+  width:100%;height:100%;
+  object-fit:contain;object-position:center;
+}
+
+/* ────────────────────────────────────────
+   SLIDESHOW CONTAINER
+──────────────────────────────────────── */
+#slideshow{
+  position:fixed;inset:0;z-index:1;overflow:hidden;
+}
+
+.slide{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+  overflow-y:auto;overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;
+  opacity:0;
+  transition:opacity .45s ease;
+  background:var(--cream);
+  pointer-events:none;
+}
+.slide.active{
+  opacity:1;pointer-events:auto;
+}
+
+.slide-inner{
+  min-height:100%;
+  display:flex;flex-direction:column;
+  align-items:center;
+  padding-bottom:70px;
+}
+
+/* ────────────────────────────────────────
+   EVENT BANNER (illustrated top section)
+──────────────────────────────────────── */
+.ev-banner{
+  width:100%;
+  height:clamp(200px,38vh,300px);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;flex-shrink:0;
+}
+.ev-banner svg.b-art{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+}
+
+/* banner gradient backgrounds */
+.bg-cover    {background:linear-gradient(160deg,#FDF6E3,#F8EDD0,#F0E2B6);}
+.bg-bless    {background:linear-gradient(155deg,#FDF6E3,#F5E8C0);}
+.bg-ganesh   {background:linear-gradient(135deg,#BF360C,#E64A19,#FF8F00);}
+.bg-mehendi  {background:linear-gradient(135deg,#1B5E20,#2E7D32,#43A047);}
+
+/* ── PHOTO BANNER (real image with zoom-reveal) ── */
+.ev-photo-banner{overflow:hidden;background:#1a1a1a;}
+.ev-photo-banner .pimg{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center 18%;
+  opacity:0;
+  transform:scale(1.07);
+  transition:opacity .85s ease .1s, transform 4s cubic-bezier(.25,.1,.25,1) .1s;
+  will-change:transform,opacity;
+}
+.slide.active .ev-photo-banner .pimg{
+  opacity:1;transform:scale(1);
+}
+.ev-photo-banner .poverlay{
+  position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(to bottom,
+    rgba(0,0,0,.04) 0%,
+    rgba(0,0,0,.08) 55%,
+    rgba(0,0,0,.52) 100%);
+}
+.ev-photo-banner .plabel{
+  position:absolute;bottom:0;left:0;right:0;z-index:2;
+  padding:10px 16px 14px;text-align:center;color:#fff;
+  opacity:0;transform:translateY(8px);
+  transition:opacity .7s ease .5s, transform .7s ease .5s;
+}
+.slide.active .ev-photo-banner .plabel{opacity:1;transform:translateY(0);}
+.ev-photo-banner .plabel .phi{
+  font-family:'Noto Serif Devanagari',serif;
+  font-size:1.05rem;letter-spacing:2px;
+  text-shadow:0 1px 8px rgba(0,0,0,.6);
+}
+.ev-photo-banner .plabel .pen{
+  font-size:.68rem;letter-spacing:4px;text-transform:uppercase;
+  opacity:.8;margin-top:2px;
+  text-shadow:0 1px 6px rgba(0,0,0,.5);
+}
+
+/* ── PORTRAIT ILLUSTRATION BANNER (shows full image, natural ratio) ── */
+.ev-portrait-banner{
+  width:calc(100% - 32px);
+  margin:16px auto 0;
+  max-width:460px;
+  border-radius:14px;
+  border:2px solid var(--gold);
+  box-shadow:0 0 0 1px var(--gold3),0 8px 28px rgba(61,26,0,.20),0 0 36px rgba(218,165,32,.14);
+  background:var(--parchment);
+  overflow:hidden;
+  position:relative;
+  flex-shrink:0;
+}
+.ev-portrait-banner .pimg{
+  width:100%;height:auto;display:block;
+  opacity:0;
+  transform:scale(1.03);
+  transition:opacity .85s ease .1s,transform 5s cubic-bezier(.25,.1,.25,1) .1s;
+  will-change:transform,opacity;
+}
+.slide.active .ev-portrait-banner .pimg{
+  opacity:1;transform:scale(1);
+}
+.ev-portrait-banner .plabel{
+  position:absolute;bottom:0;left:0;right:0;z-index:2;
+  padding:12px 16px 14px;text-align:center;color:#fff;
+  background:linear-gradient(to bottom,rgba(0,0,0,0) 0%,rgba(0,0,0,.58) 100%);
+  opacity:0;transform:translateY(8px);
+  transition:opacity .7s ease .5s,transform .7s ease .5s;
+}
+.slide.active .ev-portrait-banner .plabel{opacity:1;transform:translateY(0);}
+.ev-portrait-banner .plabel .phi{
+  font-family:'Noto Serif Devanagari',serif;
+  font-size:1.05rem;letter-spacing:2px;
+  text-shadow:0 1px 8px rgba(0,0,0,.6);
+}
+.ev-portrait-banner .plabel .pen{
+  font-size:.68rem;letter-spacing:4px;text-transform:uppercase;
+  opacity:.8;margin-top:2px;
+  text-shadow:0 1px 6px rgba(0,0,0,.5);
+}
+
+/* ── SIDE IMAGE layout — portrait-first: image on top, content below ── */
+.slide-inner--row{
+  flex-direction:column;
+  height:auto;
+  min-height:100%;
+}
+.ev-side-img{
+  width:100%;
+  height:46vh;
+  flex:none;
+  position:relative;
+  overflow:hidden;
+  background:var(--cream2);
+  border-right:none;
+  border-bottom:2px solid var(--gold);
+}
+.ev-side-img .pimg{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center 15%;
+  opacity:0;transform:scale(1.06);
+  transition:opacity .85s ease .1s,transform 5s cubic-bezier(.25,.1,.25,1) .1s;
+  will-change:transform,opacity;
+}
+.slide.active .ev-side-img .pimg{opacity:1;transform:scale(1);}
+.ev-side-img .plabel{
+  position:absolute;bottom:0;left:0;right:0;z-index:2;
+  padding:8px 10px 14px;text-align:center;color:#fff;
+  background:linear-gradient(to bottom,rgba(0,0,0,0) 0%,rgba(0,0,0,.62) 100%);
+  opacity:0;transform:translateY(8px);
+  transition:opacity .7s ease .5s,transform .7s ease .5s;
+}
+.slide.active .ev-side-img .plabel{opacity:1;transform:translateY(0);}
+.ev-side-img .plabel .phi{
+  font-family:'Noto Serif Devanagari',serif;
+  font-size:.9rem;letter-spacing:2px;
+  text-shadow:0 1px 8px rgba(0,0,0,.6);
+}
+.ev-side-img .plabel .pen{
+  font-size:.6rem;letter-spacing:3px;text-transform:uppercase;
+  opacity:.8;margin-top:2px;
+  text-shadow:0 1px 6px rgba(0,0,0,.5);
+}
+.slide-inner--row .ev-content{
+  flex:1;overflow-y:auto;
+  display:flex;flex-direction:column;justify-content:flex-start;
+  padding:18px 18px 80px;
+}
+
+/* Landscape: revert to side-by-side */
+@media (orientation:landscape){
+  .slide-inner--row{ flex-direction:row; min-height:100%; height:100%; }
+  .ev-side-img{ width:38%; height:auto; border-right:2px solid var(--gold); border-bottom:none; }
+  .slide-inner--row .ev-content{ justify-content:center; padding:8px 14px 56px; }
+}
+
+.bg-haldi    {background:linear-gradient(135deg,#E65100,#F57F17,#FBC02D);}
+.bg-sagaai   {background:linear-gradient(135deg,#4A148C,#6A1B9A,#9C27B0);}
+.bg-baraat   {background:linear-gradient(135deg,#0D47A1,#1565C0,#283593);}
+.bg-lagna    {background:linear-gradient(135deg,#7B1C1C,#C62828,#880E4F);}
+.bg-reception{background:linear-gradient(135deg,#004D40,#00695C,#00897B);}
+.bg-rsvp     {background:linear-gradient(135deg,#3E2723,#5D4037,#4E342E);}
+
+/* ────────────────────────────────────────
+   COVER SLIDE
+──────────────────────────────────────── */
+#s0{background:var(--cream);}
+
+/* Full-bleed hero layout */
+.cover-fullbleed{
+  position:relative;
+  height:100%;min-height:100%;
+  overflow:hidden;
+  display:block;padding:0;
+}
+.cover-hero-img{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;object-position:center 15%;
+  z-index:0;
+}
+.cover-top-bar{
+  position:absolute;top:0;left:0;right:0;
+  z-index:3;padding:16px 20px 18px;
+  background:rgba(253,246,227,.93);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  border-bottom:1.5px solid rgba(218,165,32,.45);
+  text-align:center;
+}
+.cover-bottom-bar{
+  position:absolute;bottom:0;left:0;right:0;
+  z-index:3;padding:16px 20px 76px;
+  background:rgba(253,246,227,.93);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  border-top:1.5px solid rgba(218,165,32,.45);
+  text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+}
+
+.cover-wrap{
+  flex:1;overflow-y:auto;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:20px 16px 72px;text-align:center;
+  gap:4px;
+}
+
+.cover-corner{position:absolute;width:70px;height:70px;opacity:.6;z-index:4;}
+.cover-corner.tl{top:10px;left:10px;}
+.cover-corner.tr{top:10px;right:10px;transform:scaleX(-1);}
+.cover-corner.bl{bottom:70px;left:10px;transform:scaleY(-1);}
+.cover-corner.br{bottom:70px;right:10px;transform:scale(-1);}
+
+.cover-blessing{
+  font-family:'Noto Serif Devanagari',serif;
+  font-size:.95rem;color:var(--gold);letter-spacing:3px;margin-bottom:4px;
+}
+.cover-sub{
+  font-size:.7rem;letter-spacing:5px;text-transform:uppercase;
+  color:var(--brown3);margin-bottom:14px;
+}
+
+.date-pill{
+  display:flex;margin:6px 0 8px;
+  border:1.5px solid var(--gold);border-radius:50px;
+  overflow:hidden;background:var(--cream2);
+}
+.dp{
+  padding:7px 14px;text-align:center;
+  display:flex;flex-direction:column;gap:2px;
+}
+.dp:not(:last-child){border-right:1px solid var(--parchment);}
+.dhi{font-family:'Noto Serif Devanagari',serif;font-size:.76rem;color:var(--gold);}
+.den{font-size:.67rem;letter-spacing:2px;text-transform:uppercase;color:var(--brown2);}
+.dnum{font-family:'Playfair Display',serif;font-size:1.55rem;color:var(--warm);font-weight:700;line-height:1.1;}
+.dyr{font-size:.78rem;color:var(--brown3);}
+
+.cover-name-hi{
+  font-family:'Noto Serif Devanagari',serif;
+  font-size:clamp(1.6rem,5.5vw,2.2rem);color:var(--warm);
+  margin-bottom:2px;letter-spacing:1px;
+}
+.cover-name-en{
+  font-family:'Great Vibes',cursive;
+  font-size:clamp(2rem,7vw,3rem);color:var(--gold);line-height:1.1;
+}
+
+.cover-location{
+  font-size:.75rem;letter-spacing:2px;text-transform:uppercase;
+  color:var(--brown3);margin-top:2px;
+  max-width:300px;text-align:center;line-height:1.6;
+}
+/* ── Venue box on cover slide ── */
+.cover-venue-box{
+  margin-top:8px;
+  border:1.5px solid rgba(218,165,32,.65);
+  outline:1px solid rgba(218,165,32,.2);
+  outline-offset:3px;
+  border-radius:3px;
+  padding:8px 20px 10px;
+  text-align:center;
+  background:rgba(218,165,32,.04);
+  max-width:260px;width:100%;
+}
+.cvb-label{
+  font-size:.78rem;font-weight:700;letter-spacing:1px;
+  color:var(--brown);margin-bottom:5px;
+  font-family:'Playfair Display',serif;
+}
+.cvb-link{text-decoration:none;color:inherit;display:block;}
+.cvb-name{
+  font-size:.92rem;font-weight:600;
+  font-family:'Playfair Display',serif;color:var(--gold);
+  font-variant:small-caps;line-height:1.3;
+}
+.cvb-sub{font-size:.72rem;color:var(--brown2);margin-top:2px;line-height:1.3;}
+.cvb-city{
+  font-size:.68rem;letter-spacing:3px;text-transform:uppercase;
+  color:var(--brown3);margin-top:4px;
+}
+.cover-venue-box:hover .cvb-name,.cover-venue-box:active .cvb-name{color:var(--gold);}
+.cover-sender{
+  margin-top:6px;font-size:.8rem;line-height:1.65;color:var(--brown2);
+  border-top:1px solid rgba(218,165,32,.3);
+  padding-top:7px;max-width:340px;
+}
+.cover-sender strong{font-family:'Playfair Display',serif;color:var(--warm);}
+.cover-sender a{color:var(--gold);text-decoration:none;font-weight:600;}
+
+.swipe-hint{
+  margin-top:6px;font-size:.72rem;letter-spacing:3px;
+  text-transform:uppercase;color:var(--brown3);opacity:.7;
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{0%,100%{opacity:.4;}50%{opacity:.8;}}
+
+/* ── COUPLE PORTRAIT ── */
+.couple-portrait{
+  position:relative;
+  margin:10px 0 12px;
+  max-width:min(72vw,270px);
+  border-radius:18px;
+  padding:5px;
+  background:var(--parchment);
+  border:2.5px solid var(--gold);
+  box-shadow:
+    0 0 0 1px var(--gold3),
+    0 10px 36px rgba(61,26,0,.22),
+    0 0 48px rgba(218,165,32,.18);
+}
+.couple-portrait img{
+  width:100%;border-radius:13px;display:block;
+}
+/* Top & bottom gold diamond accents */
+.couple-portrait::before{
+  content:'◆';
+  position:absolute;top:-9px;left:50%;transform:translateX(-50%);
+  font-size:.55rem;color:var(--gold2);
+  text-shadow:0 0 6px rgba(218,165,32,.6);
+}
+.couple-portrait::after{
+  content:'◆';
+  position:absolute;bottom:-9px;left:50%;transform:translateX(-50%);
+  font-size:.55rem;color:var(--gold2);
+}
+/* Side gold diamonds */
+.couple-portrait .portrait-corner{
+  position:absolute;top:50%;transform:translateY(-50%);
+  font-size:.5rem;color:var(--gold2);line-height:1;
+}
+.couple-portrait .portrait-corner.left{left:-8px;}
+.couple-portrait .portrait-corner.right{right:-8px;}
+
+/* ────────────────────────────────────────
+   BLESSING / COUPLE SLIDE
+──────────────────────────────────────── */
+.bless-wrap{
+  flex:1;display:flex;flex-direction:column;
+  align-items:center;padding:28px 22px;text-align:center;
+}
+.shlok{
+  font-family:'Noto Serif Devanagari',serif;
+  font-size:.9rem;line-height:2;color:var(--gold);
+  background:var(--cream2);border:1px solid var(--parchment);
+  border-radius:8px;padding:14px 18px;width:100%;max-width:460px;
+  margin-bottom:16px;
+}
+.bless-text{
+  font-size:.96rem;line-height:1.9;color:var(--brown2);
+  max-width:460px;margin-bottom:18px;
+}
+.couple-card{
+  background:var(--cream2);border:1px solid var(--parchment);
+  border-radius:10px;padding:18px 20px;width:100%;max-width:460px;
+  margin-bottom:10px;
+}
+.p-pre{font-size:.72rem;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:3px;}
+.p-name{font-family:'Great Vibes',cursive;font-size:2.3rem;color:var(--warm);line-height:1.1;}
+.p-lin{font-size:.84rem;line-height:1.85;color:var(--brown2);margin-top:6px;}
+.p-city{font-size:.75rem;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-top:4px;}
+.weds-sep{
+  font-family:'Great Vibes',cursive;font-size:1.8rem;color:var(--gold2);
+  padding:6px 0;
+}
+
+/* ────────────────────────────────────────
+   EVENT CONTENT
+──────────────────────────────────────── */
+.ev-content{
+  flex:1;display:flex;flex-direction:column;
+  align-items:center;padding:22px 22px 16px;text-align:center;
+}
+.ev-slide-hi{
+  font-family:'Noto Serif Devanagari',serif;
+  font-size:1.25rem;color:var(--warm);margin-bottom:2px;
+}
+.ev-slide-en{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.4rem,5.5vw,1.9rem);color:var(--brown);
+  font-weight:700;margin-bottom:16px;
+}
+.ev-card{
+  background:var(--cream2);border:1px solid var(--parchment);
+  border-radius:12px;padding:18px 24px;width:100%;max-width:420px;
+  margin-bottom:12px;position:relative;overflow:hidden;
+}
+.ev-card::before{
+  content:'';position:absolute;top:0;left:15%;right:15%;height:2.5px;
+  border-radius:0 0 4px 4px;
+}
+.ev-ganesh .ev-card::before{background:linear-gradient(to right,#E64A19,#FF8F00,#E64A19);}
+.ev-mehendi .ev-card::before{background:linear-gradient(to right,#2E7D32,#66BB6A,#2E7D32);}
+.ev-haldi   .ev-card::before{background:linear-gradient(to right,#F57F17,#FDD835,#F57F17);}
+.ev-sagaai  .ev-card::before{background:linear-gradient(to right,#6A1B9A,#CE93D8,#6A1B9A);}
+.ev-baraat  .ev-card::before{background:linear-gradient(to right,#1565C0,#64B5F6,#1565C0);}
+.ev-lagna   .ev-card::before{background:linear-gradient(to right,#C62828,#EF9A9A,#C62828);}
+.ev-reception .ev-card::before{background:linear-gradient(to right,#00695C,#80CBC4,#00695C);}
+
+.ev-row{
+  display:flex;align-items:center;gap:10px;
+  padding:7px 0;border-bottom:1px solid rgba(180,140,70,.12);
+  text-align:left;
+}
+.ev-row:last-child{border-bottom:none;}
+.ev-icon{font-size:1.1rem;width:22px;text-align:center;flex-shrink:0;}
+.ev-val{font-size:.93rem;color:var(--brown2);line-height:1.4;}
+.ev-val strong{font-family:'Playfair Display',serif;color:var(--warm);}
+
+.dress-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:linear-gradient(135deg,#FF69B4,#FFB6C1);
+  color:#7B0032;padding:7px 18px;border-radius:50px;
+  font-size:.82rem;letter-spacing:1px;font-weight:700;
+  margin-top:12px;
+  box-shadow:0 2px 12px rgba(255,105,180,.25);
+}
+
+/* two-event layout (Ganesh slide) */
+.ev-pair{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;
+  width:100%;max-width:460px;margin-bottom:12px;
+}
+@media(max-width:400px){.ev-pair{grid-template-columns:1fr;}}
+
+/* ── GANESH SLIDE : card | image | card ── */
+.ganesh-trio{
+  display:flex;flex-direction:row;align-items:stretch;
+  gap:6px;width:100%;padding:0 8px;margin:8px 0;
+}
+.ganesh-card-col{
+  flex:1;min-width:0;display:flex;flex-direction:column;
+}
+.ganesh-card-col .ev-card{
+  flex:1;padding:10px 8px;text-align:center;
+}
+.ganesh-img-mid{
+  width:38%;flex-shrink:0;
+  border-radius:12px;border:2px solid var(--gold);
+  box-shadow:0 0 0 1px var(--gold3),0 6px 20px rgba(61,26,0,.18);
+  overflow:hidden;position:relative;background:var(--parchment);
+}
+.ganesh-img-mid img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:center 12%;
+  opacity:0;transform:scale(1.06);
+  transition:opacity .85s ease .1s,transform 5s cubic-bezier(.25,.1,.25,1) .1s;
+  will-change:transform,opacity;
+}
+.slide.active .ganesh-img-mid img{opacity:1;transform:scale(1);}
+
+/* ────────────────────────────────────────
+   RSVP / VENUE SLIDE
+──────────────────────────────────────── */
+/* Shrink the banner on the venue/RSVP slide */
+#s8 .ev-banner{ height:clamp(52px,10vh,80px); }
+
+.venue-wrap{
+  flex:1;display:flex;flex-direction:column;
+  align-items:center;padding:16px 22px;text-align:center;
+}
+/* Two venue cards side by side */
+.venue-row{
+  display:flex;gap:14px;width:100%;max-width:860px;
+  margin-bottom:14px;
+}
+.venue-row .venue-card{
+  flex:1;max-width:none;margin-bottom:0;
+}
+.venue-card{
+  background:var(--cream2);border:1px solid var(--parchment);
+  border-radius:12px;padding:20px 24px;width:100%;max-width:420px;
+  margin-bottom:14px;
+}
+.venue-name{
+  font-family:'Playfair Display',serif;font-size:1.35rem;
+  color:var(--warm);margin-bottom:3px;
+}
+.venue-sub{font-size:.8rem;color:var(--brown3);margin-bottom:5px;}
+.venue-addr{font-size:.9rem;color:var(--brown2);line-height:1.7;margin-bottom:14px;}
+.venue-contact{
+  font-size:.86rem;color:var(--brown3);line-height:1.8;margin-top:10px;
+}
+.venue-contact a{color:var(--gold);text-decoration:none;font-weight:600;}
+
+.btn-maps{
+  display:inline-flex;align-items:center;gap:8px;
+  background:linear-gradient(135deg,#4CAF50,#388E3C);
+  color:white;padding:11px 26px;border-radius:50px;
+  font-family:'Cormorant Garamond',serif;font-size:1rem;
+  text-decoration:none;letter-spacing:1px;
+  box-shadow:0 2px 14px rgba(56,142,60,.4);
+  transition:transform .2s,box-shadow .2s;
+  border:none;cursor:pointer;
+}
+.btn-maps:hover,.btn-maps:active{transform:scale(1.04);}
+
+.btn-rsvp{
+  display:inline-flex;align-items:center;gap:8px;
+  background:linear-gradient(135deg,#B8860B,#DAA520);
+  color:#FDF6E3;padding:13px 34px;border-radius:50px;
+  font-family:'Cormorant Garamond',serif;font-size:1.1rem;
+  letter-spacing:2px;cursor:pointer;
+  border:2px solid #F5D874;
+  box-shadow:0 3px 18px rgba(184,134,11,.4);
+  transition:transform .2s,box-shadow .2s;
+  text-decoration:none;margin-top:8px;
+}
+.btn-rsvp:hover,.btn-rsvp:active{transform:scale(1.04);}
+
+.shlok-final{
+  font-family:'Noto Serif Devanagari',serif;
+  font-size:1.1rem;color:var(--gold);margin-top:16px;letter-spacing:2px;
+}
+.shlok-final-en{
+  font-size:.72rem;letter-spacing:4px;text-transform:uppercase;color:var(--brown3);
+}
+
+/* ────────────────────────────────────────
+   GOLD DIVIDER
+──────────────────────────────────────── */
+.g-div{
+  display:flex;align-items:center;gap:8px;
+  margin:14px auto;width:100%;max-width:280px;
+}
+.g-div::before,.g-div::after{
+  content:'';flex:1;height:1px;
+  background:linear-gradient(to right,transparent,var(--gold));
+}
+.g-div::after{background:linear-gradient(to left,transparent,var(--gold));}
+.g-div span{color:var(--gold2);font-size:.8rem;white-space:nowrap;}
+
+/* ────────────────────────────────────────
+   NAVIGATION ARROWS
+──────────────────────────────────────── */
+.nav-arrow{
+  position:fixed;top:50%;transform:translateY(-50%);z-index:500;
+  width:42px;height:42px;border-radius:50%;
+  background:rgba(253,246,227,.88);backdrop-filter:blur(6px);
+  border:1.5px solid var(--gold);color:var(--brown);
+  font-size:1.1rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 2px 12px rgba(0,0,0,.15);
+  transition:opacity .3s,background .2s,transform .2s;
+  user-select:none;
+}
+.nav-arrow:hover,.nav-arrow:active{background:var(--parchment);}
+.nav-arrow.gone{opacity:0;pointer-events:none;}
+#nav-prev{left:8px;}
+#nav-next{right:8px;}
+
+/* ────────────────────────────────────────
+   DOT NAVIGATION
+──────────────────────────────────────── */
+#nav-dots{
+  position:fixed;bottom:14px;left:50%;transform:translateX(-50%);
+  z-index:500;display:flex;gap:6px;align-items:center;
+  background:rgba(253,246,227,.8);backdrop-filter:blur(6px);
+  border-radius:50px;padding:6px 12px;
+  border:1px solid rgba(184,134,11,.25);
+}
+.dot{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--parchment);border:1.5px solid var(--gold);
+  cursor:pointer;transition:background .25s,transform .25s;
+  flex-shrink:0;
+}
+.dot.on{background:var(--gold);transform:scale(1.4);}
+
+/* ────────────────────────────────────────
+   RSVP MODAL
+──────────────────────────────────────── */
+#rsvp-modal{
+  position:fixed;inset:0;z-index:9990;
+  background:rgba(44,24,16,.75);backdrop-filter:blur(4px);
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;
+  opacity:0;visibility:hidden;
+  transition:opacity .3s,visibility .3s;
+}
+#rsvp-modal.open{opacity:1;visibility:visible;}
+
+.rsvp-box{
+  background:var(--cream);border:2px solid var(--gold);
+  border-radius:16px;padding:26px 24px;max-width:480px;width:100%;
+  max-height:82vh;overflow-y:auto;position:relative;
+  box-shadow:0 8px 48px rgba(0,0,0,.45);
+}
+.rsvp-close-btn{
+  position:absolute;top:12px;right:16px;
+  font-size:1.4rem;cursor:pointer;color:var(--gold2);
+  background:none;border:none;line-height:1;padding:0;
+}
+.rsvp-title{
+  font-family:'Playfair Display',serif;font-size:1.45rem;
+  color:var(--warm);text-align:center;margin-bottom:16px;
+}
+.rsvp-sec{margin-bottom:14px;}
+.rsvp-sec-label{
+  font-size:.7rem;letter-spacing:3px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:6px;display:block;
+}
+.rsvp-names{
+  font-size:.9rem;line-height:1.9;color:var(--brown2);
+}
+.rsvp-names > div{
+  padding:1px 0;
+}
+.rsvp-contact{
+  background:var(--cream2);border-radius:8px;padding:12px 16px;
+  text-align:center;
+}
+.rsvp-contact .rsvp-names a{
+  color:var(--gold);text-decoration:none;font-weight:700;font-size:1rem;
+}
+
+/* ────────────────────────────────────────
+   MUSIC BUTTON
+──────────────────────────────────────── */
+#music-fab{
+  position:fixed;bottom:58px;right:14px;z-index:9000;
+  width:46px;height:46px;border-radius:50%;
+  background:linear-gradient(135deg,#6B1A00,#DAA520);
+  border:2px solid #F5D874;cursor:pointer;
+  display:none;align-items:center;justify-content:center;
+  font-size:1.2rem;
+  box-shadow:0 3px 14px rgba(0,0,0,.3);
+  transition:transform .2s;user-select:none;
+}
+#music-fab:hover{transform:scale(1.1);}
+#music-fab.on{animation:mGlow 2s infinite;}
+@keyframes mGlow{
+  0%,100%{box-shadow:0 3px 14px rgba(0,0,0,.3),0 0 10px rgba(218,165,32,.3);}
+  50%    {box-shadow:0 3px 14px rgba(0,0,0,.3),0 0 24px rgba(218,165,32,.65);}
+}
+
+/* ────────────────────────────────────────
+   RESPONSIVE — MOBILE
+   The invitation is designed for landscape.
+   Portrait shows the rotate overlay instead.
+──────────────────────────────────────── */
+
+/* ── Smaller nav arrows on any narrow screen ── */
+@media(max-width:430px){
+  .nav-arrow{width:36px;height:36px;font-size:1rem;}
+  #nav-prev{left:4px;}
+  #nav-next{right:4px;}
+  .ov-gif{ object-fit:cover; }
+  .ov-btn{ font-size:.95rem; padding:13px 32px; letter-spacing:2px; }
+}
+
+/* ════════════════════════════════════════
+   LANDSCAPE PHONE  (~375–430 px tall)
+   Scale everything down so all content
+   fits without scrolling.
+════════════════════════════════════════ */
+@media (orientation:landscape) and (max-height:500px){
+
+  /* Narrower image panel → more room for text */
+  .ev-side-img{ width:34%; }
+
+  /* Tighter nav arrows */
+  .nav-arrow{ width:32px; height:32px; font-size:.85rem; }
+  #nav-prev{ left:3px; }
+  #nav-next{ right:3px; }
+
+  /* Content panel: collapse padding */
+  .slide-inner--row .ev-content,
+  .slide-inner--row .cover-wrap{
+    padding: 6px 14px 50px !important;
+    justify-content: center;
+  }
+  /* General ev-content top/side padding */
+  .ev-content{ padding: 6px 14px 16px !important; }
+
+  /* ── Event slide titles ── */
+  .ev-slide-hi{ font-size:.95rem !important; margin-bottom:1px !important; letter-spacing:1px; }
+  .ev-slide-en{ font-size:1.05rem !important; margin-bottom:5px !important; }
+
+  /* ── Event card ── */
+  .ev-card{
+    padding: 7px 12px !important;
+    margin-bottom: 5px !important;
+    border-radius: 8px !important;
+  }
+  .ev-row{ padding: 3px 0 !important; }
+  .ev-icon{ font-size:.88rem !important; width:18px !important; }
+  .ev-val { font-size:.76rem !important; line-height:1.25 !important; }
+  .ev-card .ev-slide-hi{ font-size:.78rem !important; margin-bottom:1px !important; }
+
+  /* ── Dress code badge ── */
+  .dress-badge{
+    font-size:.72rem !important;
+    padding: 4px 14px !important;
+    margin-top: 4px !important;
+  }
+
+  /* ── Paragraph notes below cards ── */
+  .ev-content > p{
+    font-size:.7rem !important;
+    margin-top: 3px !important;
+    line-height:1.4 !important;
+  }
+
+  /* ── Gold divider ── */
+  .g-div{ margin: 5px auto !important; }
+
+  /* ── Cover slide ── */
+  .cover-blessing { font-size:.82rem !important; margin-bottom:1px !important; }
+  .cover-sub      { font-size:.65rem !important; margin-bottom:3px !important; }
+  .cover-name-hi  { font-size:1.3rem !important; }
+  .cover-name-en  { font-size:1.65rem !important; }
+  .date-pill      { margin: 4px auto !important; padding: 3px 8px !important; gap: 0 !important; }
+  .dp             { padding: 3px 8px !important; }
+  .dnum           { font-size:1.25rem !important; }
+  .dhi, .den, .dyr{ font-size:.58rem !important; }
+  .cover-location { font-size:.68rem !important; margin-top:3px !important; }
+  .cover-sender   {
+    font-size:.68rem !important;
+    line-height:1.4 !important;
+    margin-top:4px !important;
+    padding: 6px 10px !important;
+  }
+
+  /* ── Venue / RSVP slide ── */
+  #s8 .ev-banner{ height:40px !important; }
+  .venue-wrap{ padding: 4px 10px 50px !important; }
+  .venue-row{ gap:8px !important; margin-bottom:6px !important; }
+  .venue-card{
+    padding: 7px 10px !important;
+    margin-bottom: 0 !important;
+    border-radius: 8px !important;
+  }
+  .venue-name { font-size:.9rem !important; margin-bottom:1px !important; }
+  .venue-sub  { font-size:.62rem !important; margin-bottom:2px !important; }
+  .venue-addr { font-size:.68rem !important; line-height:1.4 !important; margin-bottom:5px !important; }
+  .btn-maps   { font-size:.68rem !important; padding: 5px 10px !important; }
+  .btn-rsvp   { font-size:.82rem !important; padding: 8px 18px !important; margin-top:4px !important; }
+  .shlok-final{ font-size:.85rem !important; margin-top:6px !important; }
+  .shlok-final-en{ font-size:.6rem !important; }
+
+  /* ── Music FAB ── */
+  #music-fab{ width:36px; height:36px; font-size:1rem; bottom:8px; right:8px; }
+
+  /* ── Dots ── */
+  #nav-dots{ bottom:8px; gap:5px; }
+  .dot{ width:6px; height:6px; }
+
+  /* ── Overlay button ── */
+  .ov-btn{ font-size:.88rem; padding:11px 22px; letter-spacing:2px; }
+}
+
+/* Portrait: stack venue cards vertically */
+@media (orientation:portrait){
+  .venue-row{ flex-direction:column; }
+  .venue-row .venue-card{ flex:none; }
+}
+
+/* inline map links inside address rows */
+.ev-val a.map-link,
+.cover-location a.map-link,
+.ev-addr-link {
+  color:inherit;
+  text-decoration:underline;
+  text-decoration-color:var(--gold);
+  text-underline-offset:2px;
+}
+
+/* ────────────────────────────────────────
+   PORTRAIT-OPTIMISED FONT SIZES
+──────────────────────────────────────── */
+/* Cover */
+.slide:not(#s8) .cover-blessing  { font-size:1.1rem; }
+.slide:not(#s8) .cover-name-hi   { font-size:clamp(2rem,7vw,2.8rem); }
+.slide:not(#s8) .cover-name-en   { font-size:clamp(2.5rem,9vw,3.5rem); }
+.slide:not(#s8) .cover-location  { font-size:.9rem; }
+.slide:not(#s8) .cover-sender    { font-size:.88rem; }
+.slide:not(#s8) .dnum            { font-size:2rem; }
+/* Event slides */
+.slide:not(#s8) .ev-slide-hi     { font-size:1.6rem; }
+.slide:not(#s8) .ev-slide-en     { font-size:clamp(1.7rem,7vw,2.2rem); }
+.slide:not(#s8) .ev-val          { font-size:1rem; }
+.slide:not(#s8) .ev-icon         { font-size:1.2rem; }
+.slide:not(#s8) .dress-badge     { font-size:.95rem; }
+
+/* ────────────────────────────────────────
+   TEXT CONTENT TRANSITIONS
+   Elements start invisible + raised 18px;
+   slide activation triggers staggered reveal.
+──────────────────────────────────────── */
+.ev-slide-hi,
+.ev-slide-en,
+.ev-card,
+.dress-badge,
+.ev-content > p,
+.ev-content > div[style],
+.cover-blessing,
+.cover-sub,
+.cover-name-hi,
+.cover-name-en,
+.date-pill,
+.cover-location,.cover-venue-box,
+.cover-sender,
+.shlok,
+.bless-text,
+.g-div,
+.couple-card,
+.weds-sep {
+  opacity:0;
+  transform:translateY(18px);
+  transition:opacity .55s ease, transform .6s cubic-bezier(.25,.46,.45,.94);
+}
+
+/* ── Event slides ── */
+.slide.active .ev-slide-hi        {opacity:1;transform:none;transition-delay:.25s;}
+.slide.active .ev-slide-en        {opacity:1;transform:none;transition-delay:.40s;}
+.slide.active .ev-card            {opacity:1;transform:none;transition-delay:.56s;}
+.slide.active .dress-badge        {opacity:1;transform:none;transition-delay:.72s;}
+.slide.active .ev-content > p     {opacity:1;transform:none;transition-delay:.84s;}
+.slide.active .ev-content > div[style]{opacity:1;transform:none;transition-delay:.84s;}
+
+/* ── Cover slide ── */
+.slide.active .cover-blessing     {opacity:1;transform:none;transition-delay:.28s;}
+.slide.active .cover-sub          {opacity:1;transform:none;transition-delay:.40s;}
+.slide.active .cover-name-hi      {opacity:1;transform:none;transition-delay:.54s;}
+.slide.active .cover-name-en      {opacity:1;transform:none;transition-delay:.67s;}
+.slide.active .date-pill          {opacity:1;transform:none;transition-delay:.80s;}
+.slide.active .cover-location,.slide.active .cover-venue-box{opacity:1;transform:none;transition-delay:.92s;}
+.slide.active .cover-sender       {opacity:1;transform:none;transition-delay:1.02s;}
+
+/* ── Blessing / couple slide ── */
+.slide.active .shlok              {opacity:1;transform:none;transition-delay:.25s;}
+.slide.active .bless-text         {opacity:1;transform:none;transition-delay:.44s;}
+.slide.active .g-div              {opacity:1;transform:none;transition-delay:.60s;}
+.slide.active .couple-card        {opacity:1;transform:none;transition-delay:.72s;}
+.slide.active .weds-sep           {opacity:1;transform:none;transition-delay:.88s;}
+/* Swipe-only navigation — hide arrow buttons */
+.nav-arrow{ display:none; }
+/* Hide Netlify attribution badge if injected */
+#netlify-badge-anchor,[data-netlify-badge],.netlify-badge-wrapper{display:none!important;}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     WELCOME OVERLAY  (GIF + open button)
+══════════════════════════════════════ -->
+<div id="overlay">
+  <img class="ov-gif" src="rohit-priyanka-savethedate.gif" alt="Save the Date — Rohit &amp; Priyanka">
+  <button class="ov-btn" onclick="openInvite()">✉&ensp;Open Invitation</button>
+</div>
+
+<!-- ══════════════════════════════════════
+     SLIDESHOW
+══════════════════════════════════════ -->
+<div id="slideshow">
+
+<!-- ━━━━━ SLIDE 0 : COVER ━━━━━ -->
+<div class="slide active" id="s0">
+<div class="slide-inner slide-inner--row">
+
+  <div class="ev-side-img">
+    <img class="pimg"
+         src="rohit-priyanka-couple.jpg"
+         alt="Rohit &amp; Priyanka — Wedding Illustration"
+         loading="eager">
+    <div class="plabel">
+      <div class="phi">रोहित &amp; प्रियंका</div>
+      <div class="pen">4 December 2026</div>
+    </div>
+  </div>
+
+  <div class="cover-wrap">
+    <div class="cover-blessing">॥ श्री गणेशाय नमः ॥</div>
+    <div class="cover-sub">॥ परिणयोत्सव ॥</div>
+
+    <div class="cover-name-hi">रोहित संग प्रियंका</div>
+    <div class="cover-name-en">Rohit weds Priyanka</div>
+
+    <div class="date-pill">
+      <div class="dp"><span class="dhi">शुक्रवार</span><span class="den">Friday</span></div>
+      <div class="dp"><div class="dnum">04</div><span class="dyr">2026</span></div>
+      <div class="dp"><span class="dhi">दिसम्बर</span><span class="den">December</span></div>
+    </div>
+
+    <div class="cover-venue-box">
+      <div class="cvb-label">Venue</div>
+      <a class="cvb-link map-link" href="https://maps.google.com/?q=Shri+Aanandam+Maheshwari+Jan+Kalyan+Trust+Indore+Bypass+Road+Indore" target="_blank" rel="noopener">
+        <div class="cvb-name">Shri Anandam</div>
+        <div class="cvb-sub">(Maheshwari Jankalyan Trust)</div>
+        <div class="cvb-city">Indore</div>
+      </a>
+    </div>
+
+    <div class="cover-sender">
+      <strong>प्रेषक / RSVP</strong><br>
+      Shri. Sanjay Purshottam Das Ji Gupta<br>
+      Retd. Sub-Engineer Nagari Prashasan.<br>
+      B-81, Gayatri Paradise, Kanadiya Road<br>
+      Indore (M.P.)<br>
+      <a href="tel:9926069663">9926069663</a>, <a href="tel:7987453608">7987453608</a>
+    </div>
+
+    <div class="swipe-hint" style="display:none;"></div>
+  </div>
+
+</div>
+</div>
+
+<!-- ━━━━━ SLIDE 1 : GANESH PUJA + MATA PUJA ━━━━━ -->
+<div class="slide" id="s1">
+<div class="slide-inner slide-inner--row">
+
+  <div class="ev-side-img">
+    <img class="pimg"
+         src="rohit-priyanka-ganesh.jpg"
+         alt="Ganesh Puja &amp; Mata Puja — Rohit &amp; Priyanka"
+         loading="lazy">
+    <div class="plabel">
+      <div class="phi">॥ मंगल प्रसंग ॥</div>
+      <div class="pen">Auspicious Ceremonies</div>
+    </div>
+  </div>
+
+  <div class="ev-content ev-ganesh">
+    <div class="ev-slide-hi">मंगल प्रसंग</div>
+    <div class="ev-slide-en">Auspicious Ceremonies</div>
+
+    <div class="ev-card" style="text-align:center;max-width:320px;">
+      <div style="font-size:1.5rem;margin-bottom:4px;">🪔</div>
+      <div class="ev-slide-hi" style="font-size:.9rem;margin-bottom:2px;">श्री गणेश पूजन</div>
+      <div style="font-family:'Playfair Display',serif;font-size:.9rem;font-weight:600;color:var(--brown);margin-bottom:8px;">Ganesh Puja</div>
+      <div class="ev-row"><span class="ev-icon">📅</span><span class="ev-val">2nd December 2026</span></div>
+      <div class="ev-row"><span class="ev-icon">⏰</span><span class="ev-val">10:00 AM</span></div>
+      <div class="ev-row"><span class="ev-icon">📍</span><span class="ev-val"><a class="map-link" href="https://maps.google.com/?q=22.73235621651443,75.96232860641798" target="_blank" rel="noopener">At Residence, Indore</a></span></div>
+    </div>
+
+    <div class="ev-card" style="text-align:center;max-width:320px;margin-top:8px;">
+      <div style="font-size:1.5rem;margin-bottom:4px;">🌺</div>
+      <div class="ev-slide-hi" style="font-size:.9rem;margin-bottom:2px;">माता पूजन</div>
+      <div style="font-family:'Playfair Display',serif;font-size:.9rem;font-weight:600;color:var(--brown);margin-bottom:8px;">Mata Puja</div>
+      <div class="ev-row"><span class="ev-icon">📅</span><span class="ev-val">2nd December 2026</span></div>
+      <div class="ev-row"><span class="ev-icon">⏰</span><span class="ev-val">1:00 PM</span></div>
+      <div class="ev-row"><span class="ev-icon">📍</span><span class="ev-val"><a class="map-link" href="https://maps.google.com/?q=22.73235621651443,75.96232860641798" target="_blank" rel="noopener">At Residence, Indore</a></span></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ━━━━━ SLIDE 2 : MEHENDI ━━━━━ -->
+<div class="slide" id="s2">
+<div class="slide-inner slide-inner--row">
+
+  <div class="ev-side-img">
+    <img class="pimg"
+         src="rohit-priyanka-mehendi.jpg"
+         alt="Mehendi Ceremony — Rohit &amp; Priyanka"
+         loading="lazy">
+    <div class="plabel">
+      <div class="phi">मेहंदी</div>
+      <div class="pen">Mehendi Ceremony</div>
+    </div>
+  </div>
+
+  <div class="ev-content ev-mehendi">
+    <div class="ev-slide-hi">मेहंदी</div>
+    <div class="ev-slide-en">Mehendi Ceremony</div>
+    <div class="ev-card" style="max-width:360px;">
+      <div class="ev-row"><span class="ev-icon">📅</span><span class="ev-val"><strong>3rd December 2026</strong></span></div>
+      <div class="ev-row"><span class="ev-icon">⏰</span><span class="ev-val">11:00 AM onwards</span></div>
+      <div class="ev-row"><span class="ev-icon">📍</span><span class="ev-val"><a class="map-link" href="https://maps.google.com/?q=22.73235621651443,75.96232860641798" target="_blank" rel="noopener">At Residence, Indore</a></span></div>
+      <div class="ev-row"><span class="ev-icon">🎨</span><span class="ev-val">Henna, Music &amp; Celebrations</span></div>
+    </div>
+    <p style="font-size:.88rem;color:var(--brown3);text-align:center;line-height:1.7;max-width:320px;margin-top:4px">
+      ✿ &nbsp;Come adorned in your finest colours &nbsp;✿
+    </p>
+  </div>
+</div>
+</div>
+
+<!-- ━━━━━ SLIDE 3 : HALDI ━━━━━ -->
+<div class="slide" id="s3">
+<div class="slide-inner slide-inner--row">
+
+  <div class="ev-side-img">
+    <img class="pimg"
+         src="rohit-priyanka-haldi.jpg"
+         alt="Haldi Ceremony — Rohit &amp; Priyanka"
+         loading="lazy">
+    <div class="plabel">
+      <div class="phi">हल्दी</div>
+      <div class="pen">Haldi Ceremony</div>
+    </div>
+  </div>
+
+  <div class="ev-content ev-haldi">
+    <div class="ev-slide-hi">हल्दी</div>
+    <div class="ev-slide-en">Haldi Ceremony</div>
+    <div class="ev-card" style="max-width:360px;">
+      <div class="ev-row"><span class="ev-icon">📅</span><span class="ev-val"><strong>4th December 2026</strong></span></div>
+      <div class="ev-row"><span class="ev-icon">⏰</span><span class="ev-val">11:00 AM</span></div>
+      <div class="ev-row"><span class="ev-icon">📍</span><span class="ev-val"><a class="map-link" href="https://maps.google.com/?q=Shri+Aanandam+Maheshwari+Jan+Kalyan+Trust+Indore+Bypass+Road+Indore" target="_blank" rel="noopener">Shri Anandam (Maheshwari Jankalyan Trust), Indore</a></span></div>
+    </div>
+    <div class="dress-badge">👗 &ensp; Dress Code: Pink &ensp;(Optional)</div>
+    <p style="font-size:.82rem;color:var(--brown3);margin-top:10px;text-align:center">
+      Please wear pink to celebrate this joyous occasion 💗
+    </p>
+  </div>
+</div>
+</div>
+
+<!-- ━━━━━ SLIDE 4 : SAGAAI / TIKA ━━━━━ -->
+<div class="slide" id="s4">
+<div class="slide-inner slide-inner--row">
+
+  <div class="ev-side-img">
+    <img class="pimg"
+         src="rohit-priyanka-sagaai.jpg"
+         alt="Engagement &amp; Tika — Rohit &amp; Priyanka"
+         loading="lazy">
+    <div class="plabel">
+      <div class="phi">सगाई · टीका</div>
+      <div class="pen">Engagement &amp; Tika</div>
+    </div>
+  </div>
+
+  <div class="ev-content ev-sagaai">
+    <div class="ev-slide-hi">सगाई, टीका</div>
+    <div class="ev-slide-en">Engagement &amp; Tika</div>
+    <div class="ev-card" style="max-width:360px;">
+      <div class="ev-row"><span class="ev-icon">📅</span><span class="ev-val"><strong>4th December 2026</strong></span></div>
+      <div class="ev-row"><span class="ev-icon">⏰</span><span class="ev-val">2:30 PM</span></div>
+      <div class="ev-row"><span class="ev-icon">📍</span><span class="ev-val"><a class="map-link" href="https://maps.google.com/?q=Shri+Aanandam+Maheshwari+Jan+Kalyan+Trust+Indore+Bypass+Road+Indore" target="_blank" rel="noopener">Shri Anandam (Maheshwari Jankalyan Trust), Indore</a></span></div>
+      <div class="ev-row"><span class="ev-icon">✨</span><span class="ev-val">The auspicious exchange of blessings</span></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ━━━━━ SLIDE 5 : BARAAT ━━━━━ -->
+<div class="slide" id="s5">
+<div class="slide-inner slide-inner--row">
+
+  <div class="ev-side-img">
+    <img class="pimg"
+         src="rohit-priyanka-baraat.jpg"
+         alt="Baraat Procession — Rohit &amp; Priyanka"
+         loading="lazy">
+    <div class="plabel">
+      <div class="phi">वर निकासी</div>
+      <div class="pen">Baraat Procession</div>
+    </div>
+  </div>
+
+  <div class="ev-content ev-baraat">
+    <div class="ev-slide-hi">वर निकासी</div>
+    <div class="ev-slide-en">Baraat Procession</div>
+    <div class="ev-card" style="max-width:360px;">
+      <div class="ev-row"><span class="ev-icon">📅</span><span class="ev-val"><strong>4th December 2026</strong></span></div>
+      <div class="ev-row"><span class="ev-icon">⏰</span><span class="ev-val">5:00 PM</span></div>
+      <div class="ev-row"><span class="ev-icon">📍</span><span class="ev-val"><a class="map-link" href="https://maps.google.com/?q=Shri+Aanandam+Maheshwari+Jan+Kalyan+Trust+Indore+Bypass+Road+Indore" target="_blank" rel="noopener">Shri Anandam (Maheshwari Jankalyan Trust), Indore</a></span></div>
+      <div class="ev-row"><span class="ev-icon">🎶</span><span class="ev-val">Band, music &amp; celebrations</span></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ━━━━━ SLIDE 6 : RECEPTION ━━━━━ -->
+<div class="slide" id="s6">
+<div class="slide-inner slide-inner--row">
+
+  <div class="ev-side-img">
+    <img class="pimg"
+         src="rohit-priyanka-reception.jpg"
+         alt="Reception &amp; Dinner — Rohit &amp; Priyanka"
+         loading="lazy">
+    <div class="plabel">
+      <div class="phi">आशीर्वाद समारोह</div>
+      <div class="pen">Reception &amp; Dinner</div>
+    </div>
+  </div>
+
+  <div class="ev-content ev-reception">
+    <div class="ev-slide-hi">आशीर्वाद समारोह</div>
+    <div class="ev-slide-en">Reception &amp; Dinner</div>
+    <div class="ev-card" style="max-width:360px;">
+      <div class="ev-row"><span class="ev-icon">📅</span><span class="ev-val"><strong>Friday, 4th December 2026</strong></span></div>
+      <div class="ev-row"><span class="ev-icon">⏰</span><span class="ev-val">7:00 PM onwards</span></div>
+      <div class="ev-row"><span class="ev-icon">📍</span><span class="ev-val"><a class="map-link" href="https://maps.google.com/?q=Shri+Aanandam+Maheshwari+Jan+Kalyan+Trust+Indore+Bypass+Road+Indore" target="_blank" rel="noopener">Shri Anandam (Maheshwari Jankalyan Trust), Indore</a></span></div>
+      <div class="ev-row"><span class="ev-icon">🍽️</span><span class="ev-val">Blessings ceremony &amp; grand dinner</span></div>
+    </div>
+    <div class="g-div"><span>॥ स्वरुचिभोज ॥</span></div>
+  </div>
+</div>
+</div>
+
+<!-- ━━━━━ SLIDE 7 : SHUBH LAGNA ━━━━━ -->
+<div class="slide" id="s7">
+<div class="slide-inner slide-inner--row">
+
+  <div class="ev-side-img">
+    <img class="pimg"
+         src="rohit-priyanka-lagna.jpg"
+         alt="Wedding Ceremony — Rohit &amp; Priyanka"
+         loading="lazy">
+    <div class="plabel">
+      <div class="phi">शुभ लग्न</div>
+      <div class="pen">Wedding Ceremony</div>
+    </div>
+  </div>
+
+  <div class="ev-content ev-lagna">
+    <div class="ev-slide-hi">शुभ लग्न</div>
+    <div class="ev-slide-en">Wedding Ceremony</div>
+    <div class="ev-card" style="max-width:360px;">
+      <div class="ev-row"><span class="ev-icon">📅</span><span class="ev-val"><strong>4th / 5th December 2026</strong></span></div>
+      <div class="ev-row"><span class="ev-icon">⏰</span><span class="ev-val">12:00 Midnight (Muhurta)</span></div>
+      <div class="ev-row"><span class="ev-icon">📍</span><span class="ev-val"><a class="map-link" href="https://maps.google.com/?q=Shri+Aanandam+Maheshwari+Jan+Kalyan+Trust+Indore+Bypass+Road+Indore" target="_blank" rel="noopener">Shri Anandam (Maheshwari Jankalyan Trust), Indore</a></span></div>
+      <div class="ev-row"><span class="ev-icon">🔥</span><span class="ev-val">Sapt Padi — Seven Holy Vows</span></div>
+    </div>
+    <p style="font-size:.88rem;color:var(--brown3);text-align:center;line-height:1.7;margin-top:8px">
+      ॥ दो दिलों का मिलन ॥
+    </p>
+  </div>
+</div>
+</div>
+
+<!-- ━━━━━ SLIDE 8 : VENUE + RSVP ━━━━━ -->
+<div class="slide" id="s8">
+<div class="slide-inner">
+
+  <div class="ev-banner bg-rsvp">
+    <svg class="b-art" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+      <defs><pattern id="dp9" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+        <circle cx="10" cy="10" r="1" fill="rgba(255,215,0,.15)"/></pattern></defs>
+      <rect width="400" height="200" fill="url(#dp9)"/>
+      <!-- Decorative frame/border -->
+      <rect x="20" y="14" width="360" height="172" rx="6" fill="none" stroke="rgba(218,165,32,.4)" stroke-width="1.5"/>
+      <rect x="28" y="22" width="344" height="156" rx="4" fill="none" stroke="rgba(218,165,32,.2)" stroke-width="1"/>
+      <!-- Corner diamonds -->
+      <path d="M28 28 L34 22 L40 28 L34 34Z" fill="rgba(218,165,32,.45)"/>
+      <path d="M360 28 L366 22 L372 28 L366 34Z" fill="rgba(218,165,32,.45)"/>
+      <path d="M28 172 L34 166 L40 172 L34 178Z" fill="rgba(218,165,32,.45)"/>
+      <path d="M360 172 L366 166 L372 172 L366 178Z" fill="rgba(218,165,32,.45)"/>
+      <!-- Center ornament -->
+      <path d="M180 95 L200 75 L220 95 L200 115Z" fill="rgba(218,165,32,.35)" stroke="rgba(255,215,0,.5)" stroke-width="1"/>
+      <circle cx="200" cy="95" r="12" fill="rgba(218,165,32,.2)" stroke="rgba(255,215,0,.5)" stroke-width="1"/>
+      <text x="200" y="100" text-anchor="middle" font-size="14" fill="rgba(255,215,0,.8)" font-family="Noto Serif Devanagari">ॐ</text>
+      <!-- Side lotuses -->
+      <g transform="translate(85,95)" opacity=".5">
+        <ellipse cx="0" cy="-12" rx="6" ry="14" fill="rgba(218,165,32,.4)" transform="rotate(-20 0 -12)"/>
+        <ellipse cx="0" cy="-12" rx="6" ry="14" fill="rgba(218,165,32,.4)" transform="rotate(20 0 -12)"/>
+        <ellipse cx="0" cy="-14" rx="5" ry="12" fill="rgba(218,165,32,.5)"/>
+        <circle cx="0" cy="-24" r="5" fill="rgba(255,215,0,.65)"/>
+      </g>
+      <g transform="translate(315,95)" opacity=".5">
+        <ellipse cx="0" cy="-12" rx="6" ry="14" fill="rgba(218,165,32,.4)" transform="rotate(-20 0 -12)"/>
+        <ellipse cx="0" cy="-12" rx="6" ry="14" fill="rgba(218,165,32,.4)" transform="rotate(20 0 -12)"/>
+        <ellipse cx="0" cy="-14" rx="5" ry="12" fill="rgba(218,165,32,.5)"/>
+        <circle cx="0" cy="-24" r="5" fill="rgba(255,215,0,.65)"/>
+      </g>
+    </svg>
+    <div style="position:relative;z-index:2;text-align:center;color:rgba(255,215,0,.92)">
+      <div style="font-size:.85rem;letter-spacing:4px;text-transform:uppercase;color:rgba(255,215,0,.85);">Welcome to Our Celebration</div>
+    </div>
+  </div>
+
+  <div class="venue-wrap">
+    <div class="venue-row">
+      <div class="venue-card">
+        <div class="venue-name">Shri Aanandam</div>
+        <div class="venue-sub">(Shri Maheshwari Jan Kalyan Trust)</div>
+        <div class="venue-addr">Indore Bypass Road, Indore (M.P.)</div>
+        <a class="btn-maps" href="https://maps.google.com/?q=Shri+Aanandam+Maheshwari+Jan+Kalyan+Trust+Indore+Bypass+Road+Indore" target="_blank" rel="noopener">
+          📍 &ensp; View on Google Maps
+        </a>
+      </div>
+
+      <div class="venue-card">
+        <div class="venue-name">Residence</div>
+        <div class="venue-addr">B-81, Gayatri Paradise, Kanadia Main, Indore (M.P.)</div>
+        <a class="btn-maps" href="https://maps.google.com/?q=22.73235621651443,75.96232860641798" target="_blank" rel="noopener">
+          📍 &ensp; View on Google Maps
+        </a>
+      </div>
+    </div>
+
+
+    <div class="g-div" style="margin-top:18px;"><span>✦ &ensp; ✦</span></div>
+
+    <div class="shlok-final">॥ शुभम् भवतु ॥</div>
+    <div class="shlok-final-en">May all be auspicious</div>
+
+    <div style="margin-top:14px;"></div>
+  </div>
+</div>
+</div>
+
+</div><!-- /slideshow -->
+
+<!-- ══════════════════════════════════════
+     NAVIGATION
+══════════════════════════════════════ -->
+<button class="nav-arrow gone" id="nav-prev" onclick="prevSlide()" aria-label="Previous">&#8592;</button>
+<button class="nav-arrow" id="nav-next" onclick="nextSlide()" aria-label="Next">&#8594;</button>
+
+<div id="nav-dots"></div>
+
+<!-- ══════════════════════════════════════
+     RSVP MODAL
+══════════════════════════════════════ -->
+<div id="rsvp-modal" onclick="closeRSVP(event)">
+  <div class="rsvp-box" onclick="event.stopPropagation()">
+    <button class="rsvp-close-btn" onclick="closeRSVP()">&times;</button>
+    <div class="rsvp-title">💌 &nbsp;RSVP &amp; Family Details</div>
+
+    <hr class="rsvp-hr" style="border:none;border-top:1px solid var(--parchment);margin:0 0 14px;">
+
+    <div class="rsvp-sec">
+      <span class="rsvp-sec-label">Hosted By</span>
+      <div class="rsvp-contact">
+        <div class="rsvp-names" style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--warm);margin-bottom:6px;">Sanjay Gupta</div>
+        <div class="rsvp-names">B-81, Gayatri Paradise, Kanadiya Road<br>Indore (M.P.)</div>
+        <div style="margin-top:8px;">
+          <a href="tel:9926069663">9926069663</a>
+          &ensp;|&ensp;
+          <a href="tel:7987453608">7987453608</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="rsvp-sec">
+      <span class="rsvp-sec-label">Welcoming</span>
+      <div class="rsvp-names">
+        <div>• Late Smt. Meena &amp; Shri Devendra Prasad ji Gupta</div>
+        <div>• Smt. Munni &amp; Shri Lalan Prasad ji Gupta</div>
+        <div>• Smt. Laxmi &amp; Shri Vimal ji Gupta</div>
+        <div>• Smt. Shikha &amp; Shri Anil Gupta</div>
+        <div>• Smt. Sunita &amp; Shri Sunil Gupta</div>
+        <div>• Smt. Meenu &amp; Shri Kishor Gupta</div>
+      </div>
+    </div>
+
+    <div class="rsvp-sec">
+      <span class="rsvp-sec-label">Maternal Family — Nanihal Paksh</span>
+      <div class="rsvp-names">
+        <div>• Smt. Manorama &amp; Late Shri Shivnarayan Bansal</div>
+        <div>• Smt. Koshalya &amp; Shri Brajmohan Bansal</div>
+        <div>• Smt. Nirmala &amp; Shri Pradeep Bansal</div>
+        <div>• Smt. Aashima &amp; Shri Anshul Bansal &amp; the entire Bansal family</div>
+      </div>
+    </div>
+
+    <div class="rsvp-sec">
+      <span class="rsvp-sec-label">Seeking Your Blessings</span>
+      <div class="rsvp-names">
+        <div>• Smt. Ruchi &amp; Shri Rahul Gupta</div>
+        <div>• Smt. Varsha &amp; Shri Abhay Gupta</div>
+        <div>• Smt. Neha &amp; Shri Akshay</div>
+        <div>• Smt. Pragati &amp; Shri Abhishek</div>
+      </div>
+    </div>
+
+    <div class="rsvp-sec">
+      <span class="rsvp-sec-label">Eagerly Awaiting</span>
+      <div class="rsvp-names">
+        Mohit, Kushagra, Palash, Shubham, Ajay, Ekta, Ravya
+        &amp; the entire Bindal family
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     BACKGROUND MUSIC
+     Indian Folk Classical Flute Music (CC BY-SA 4.0)
+══════════════════════════════════════ -->
+<audio id="bgAudio" loop preload="auto">
+  <source src="rohit-priyanka-bgmusic.m4a" type="audio/mp4">
+</audio>
+
+<!-- Floating music toggle -->
+<div id="music-fab" onclick="toggleMusic()" title="Play / Pause music">🎵</div>
+
+<script>
+/* Redirect desktop/non-touch users to the desktop version */
+if(!window.matchMedia('(pointer:coarse)').matches)
+  window.location.replace('rohit-priyanka-wedding.html');
+
+/* ── SLIDES ── */
+const slides = Array.from(document.querySelectorAll('.slide'));
+const TOTAL  = slides.length;
+let cur = 0;
+let transitioning = false;
+
+function buildDots(){
+  const nav = document.getElementById('nav-dots');
+  for(let i=0;i<TOTAL;i++){
+    const d = document.createElement('button');
+    d.className = 'dot' + (i===0?' on':'');
+    d.setAttribute('aria-label','Go to slide '+(i+1));
+    d.onclick = ()=>goTo(i);
+    nav.appendChild(d);
+  }
+}
+
+function updateUI(){
+  document.getElementById('nav-prev').classList.toggle('gone', cur===0);
+  document.getElementById('nav-next').classList.toggle('gone', cur===TOTAL-1);
+  document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('on',i===cur));
+}
+
+function goTo(idx){
+  if(idx===cur || transitioning || idx<0 || idx>=TOTAL) return;
+  transitioning = true;
+  slides[cur].classList.remove('active');
+  slides[idx].classList.add('active');
+  cur = idx;
+  updateUI();
+  setTimeout(()=>{ transitioning=false; }, 450);
+  scheduleAutoSlide(); /* reset 5-second countdown after every navigation */
+}
+
+function nextSlide(){ goTo(cur+1); }
+function prevSlide(){ goTo(cur-1); }
+
+/* ── AUTO-SLIDE ── */
+let autoTimer = null;
+let autoEnabled = false;
+let slidePaused = false;
+
+function scheduleAutoSlide(){
+  if(!autoEnabled) return;
+  if(autoTimer) clearTimeout(autoTimer);
+  if(cur < TOTAL - 1){
+    autoTimer = setTimeout(nextSlide, 6000);
+  }
+}
+
+function startAutoSlide(){
+  autoEnabled = true;
+  scheduleAutoSlide();
+}
+
+function showAutoToast(msg){
+  let t = document.getElementById('auto-toast');
+  if(!t){
+    t = document.createElement('div');
+    t.id = 'auto-toast';
+    t.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);'+
+      'background:rgba(0,0,0,.65);color:#fff;font-size:.78rem;letter-spacing:2px;'+
+      'padding:7px 18px;border-radius:50px;z-index:999;pointer-events:none;'+
+      'transition:opacity .4s;white-space:nowrap;';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.style.opacity = '1';
+  clearTimeout(t._hide);
+  t._hide = setTimeout(()=>{ t.style.opacity='0'; }, 1800);
+}
+
+
+document.addEventListener('keydown', e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowDown') nextSlide();
+  if(e.key==='ArrowLeft' ||e.key==='ArrowUp')   prevSlide();
+});
+
+/* ── TOUCH SWIPE + TAP ── */
+let touchX=0, touchY=0;
+document.addEventListener('touchstart', e=>{
+  touchX=e.touches[0].clientX;
+  touchY=e.touches[0].clientY;
+},{passive:true});
+document.addEventListener('touchend', e=>{
+  if(!document.getElementById('overlay').classList.contains('hide')) return;
+  const dx = e.changedTouches[0].clientX - touchX;
+  const dy = e.changedTouches[0].clientY - touchY;
+  const adx = Math.abs(dx), ady = Math.abs(dy);
+  if(adx > ady && adx > 45){
+    if(dx < 0) nextSlide(); else prevSlide();
+  } else if(adx < 30 && ady < 30){
+    if(!e.target.closest('button,a,[onclick],.dot,#music-fab')) togglePlayback();
+  }
+},{passive:true});
+
+/* ── TAP TO PAUSE / RESUME (slideshow + music together) ── */
+function togglePlayback(){
+  if(!autoEnabled && !slidePaused) return; /* invitation not started yet */
+  const fab = document.getElementById('music-fab');
+  if(!slidePaused){
+    slidePaused = true;
+    autoEnabled = false;
+    if(autoTimer){ clearTimeout(autoTimer); autoTimer = null; }
+    if(musicOn){ audio.pause(); musicOn = false; fab.textContent='🎵'; fab.classList.remove('on'); }
+    showAutoToast('⏸ Paused');
+  } else {
+    slidePaused = false;
+    autoEnabled = true;
+    scheduleAutoSlide();
+    if(musicEverStarted && !musicOn){
+      audio.play().then(()=>{ musicOn=true; fab.textContent='⏸'; fab.classList.add('on'); }).catch(()=>{});
+    }
+    showAutoToast('▶ Resumed');
+  }
+}
+
+function showAutoToast(msg){
+  let t = document.getElementById('auto-toast');
+  if(!t){
+    t = document.createElement('div');
+    t.id = 'auto-toast';
+    t.style.cssText = 'position:fixed;bottom:76px;left:50%;transform:translateX(-50%);'+
+      'background:rgba(0,0,0,.72);color:#F5D874;font-family:serif;font-size:.95rem;'+
+      'padding:8px 22px;border-radius:24px;pointer-events:none;z-index:9000;'+
+      'opacity:0;transition:opacity .3s;white-space:nowrap;';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.style.opacity = '1';
+  clearTimeout(t._timer);
+  t._timer = setTimeout(()=>{ t.style.opacity='0'; }, 1800);
+}
+
+/* ── WAKE LOCK — keep screen on for 5 minutes ── */
+let _wakeLock = null;
+async function requestWakeLock(){
+  if(!('wakeLock' in navigator)) return;
+  try {
+    _wakeLock = await navigator.wakeLock.request('screen');
+    _wakeLock.addEventListener('release', ()=>{ _wakeLock = null; });
+    setTimeout(()=>{ if(_wakeLock) _wakeLock.release(); }, 300000);
+    document.addEventListener('visibilitychange', async ()=>{
+      if(document.visibilityState==='visible' && !_wakeLock){
+        try{ _wakeLock = await navigator.wakeLock.request('screen'); }catch(e){}
+      }
+    },{once:true});
+  } catch(e){}
+}
+
+/* ── FLOATING PARTICLES ── */
+function spawnParticle(){
+  const p = document.createElement('div');
+  p.className = 'particle';
+  const s = 3 + Math.random()*5;
+  p.style.cssText = `width:${s}px;height:${s}px;left:${Math.random()*100}vw;bottom:-10px;`+
+    `animation-duration:${4+Math.random()*5}s;opacity:${0.3+Math.random()*0.4}`;
+  document.body.appendChild(p);
+  setTimeout(()=>p.remove(), 9000);
+}
+setInterval(spawnParticle, 550);
+
+/* ── MUSIC ── */
+const audio = document.getElementById('bgAudio');
+let musicOn = false;
+let musicEverStarted = false;
+
+function startMusic(){
+  audio.volume = 0.55;
+  audio.play().then(()=>{
+    musicOn = true;
+    musicEverStarted = true;
+    const fab = document.getElementById('music-fab');
+    fab.style.display='flex';
+    fab.textContent='⏸';
+    fab.classList.add('on');
+    fab.title='Pause music';
+  }).catch(()=>{
+    /* Autoplay blocked — show fab so user can tap to start */
+    const fab = document.getElementById('music-fab');
+    fab.style.display='flex';
+    fab.textContent='🎵';
+  });
+}
+
+function toggleMusic(){
+  const fab = document.getElementById('music-fab');
+  if(musicOn){
+    audio.pause();
+    musicOn=false;
+    fab.textContent='🎵';
+    fab.classList.remove('on');
+    fab.title='Play music';
+  } else {
+    audio.play().then(()=>{
+      musicOn=true;
+      fab.textContent='⏸';
+      fab.classList.add('on');
+      fab.title='Pause music';
+    });
+  }
+}
+
+/* ── INIT ── */
+buildDots();
+updateUI();
+
+/* ── MUSIC FROM GIF — start on very first touch/click anywhere on overlay ── */
+(function(){
+  const ov = document.getElementById('overlay');
+  function tryStart(){ startMusic(); }
+  ov.addEventListener('touchstart', tryStart, {once:true, passive:true});
+  ov.addEventListener('mousedown',  tryStart, {once:true});
+  /* Desktop autoplay attempt — silently ignored if browser blocks it */
+  startMusic();
+})();
+
+/* ── FULLSCREEN ── */
+function enterFullscreen(){
+  const el = document.documentElement;
+  const req = el.requestFullscreen || el.webkitRequestFullscreen || el.mozRequestFullScreen;
+  if(req) req.call(el).catch(()=>{});
+}
+
+/* ── OPEN INVITE — hides overlay, ensures music is running, starts slideshow ── */
+function openInvite(){
+  document.getElementById('overlay').classList.add('hide');
+  startMusic();
+  startAutoSlide();
+  requestWakeLock();
+  enterFullscreen();
+  /* Re-trigger cover slide entrance animations */
+  const s0 = slides[0];
+  s0.classList.remove('active');
+  void s0.offsetWidth;
+  s0.classList.add('active');
+}
+
+/* ── RSVP MODAL ── */
+function openRSVP(){
+  document.getElementById('rsvp-modal').classList.add('open');
+}
+function closeRSVP(e){
+  if(!e || e.target===document.getElementById('rsvp-modal')){
+    document.getElementById('rsvp-modal').classList.remove('open');
+  }
+}
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeRSVP(); });
+</script>
+</body>
+</html>
