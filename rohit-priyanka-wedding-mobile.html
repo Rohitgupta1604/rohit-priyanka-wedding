@@ -9,6 +9,8 @@
 <title>Rohit weds Priyanka · 4 December 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" href="rohit-priyanka-savethedate.mp4" as="video" type="video/mp4">
+<link rel="preload" href="rohit-priyanka-couple.jpg" as="image">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Great+Vibes&family=Noto+Serif+Devanagari:wght@400;600&display=swap" rel="stylesheet">
 <style>
 /* ── VARIABLES ── */
@@ -55,6 +57,7 @@ body{
 .ov-gif{
   position:absolute;inset:0;width:100%;height:100%;
   object-fit:contain;object-position:center;z-index:0;
+  pointer-events:none;display:block;
 }
 .ov-btn{
   position:relative;z-index:2;overflow:hidden;
@@ -974,7 +977,9 @@ body{
      WELCOME OVERLAY  (GIF + open button)
 ══════════════════════════════════════ -->
 <div id="overlay">
-  <img class="ov-gif" src="rohit-priyanka-savethedate.gif" alt="Save the Date — Rohit &amp; Priyanka">
+  <video class="ov-gif" autoplay loop muted playsinline>
+    <source src="rohit-priyanka-savethedate.mp4" type="video/mp4">
+  </video>
   <button class="ov-btn" onclick="openInvite()">✉&ensp;Open Invitation</button>
 </div>
 
@@ -991,7 +996,8 @@ body{
     <img class="pimg"
          src="rohit-priyanka-couple.jpg"
          alt="Rohit &amp; Priyanka — Wedding Illustration"
-         loading="eager">
+         loading="eager"
+         fetchpriority="high">
     <div class="plabel">
       <div class="phi">रोहित &amp; प्रियंका</div>
       <div class="pen">4 December 2026</div>
@@ -1403,7 +1409,7 @@ body{
      BACKGROUND MUSIC
      Indian Folk Classical Flute Music (CC BY-SA 4.0)
 ══════════════════════════════════════ -->
-<audio id="bgAudio" loop preload="auto">
+<audio id="bgAudio" loop preload="none">
   <source src="rohit-priyanka-bgmusic.m4a" type="audio/mp4">
 </audio>
 
